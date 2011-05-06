@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:db="http://www.douban.com/xmlns/" xmlns:gd="http://schemas.google.com/g/2005" xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/" xmlns:opensearch="http://a9.com/-/spec/opensearchrss/1.0/">
+  <title>搜索 javascript 的结果</title>
+  <entry>
+    <id>http://api.douban.com/book/subject/2228378</id>
+    <title>JavaScript权威指南</title>
+    <category scheme="http://www.douban.com/2007#kind" term="http://www.douban.com/2007#book"/>
+    <author>
+      <name>弗拉纳根</name>
+    </author>
+    <link href="http://api.douban.com/book/subject/2228378" rel="self"/>
+    <link href="http://book.douban.com/subject/2228378/" rel="alternate"/>
+    <link href="http://img3.douban.com/spic/s2904974.jpg" rel="image"/>
+    <db:attribute name="isbn10">7111216326</db:attribute>
+    <db:attribute name="isbn13">9787111216322</db:attribute>
+    <db:attribute name="translator">李强</db:attribute>
+    <db:attribute name="author">弗拉纳根</db:attribute>
+    <db:attribute name="price">109.0</db:attribute>
+    <db:attribute name="publisher">机械工业出版社</db:attribute>
+    <db:attribute name="pubdate">2007-8</db:attribute>
+    <gd:rating average="8.9" max="10" min="0" numRaters="241"/>
+  </entry>
+</feed>

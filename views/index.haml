@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+%html{:lang => "zh-CN"}
+  %meta{'http-equiv' => "Content-Type", :content => "text/html; charset=utf-8"}
+  %link{ :href => '/css/brainhalf.css', :rel => 'stylesheet', :type => 'text/css'}
+  %script{:type => 'text/javascript', :src => '/javascripts/jquery-1.5.2.min.js'}
+  %script{:type => 'text/javascript', :src => '/javascripts/bh.js'}
+  %title= "书籍搜索,搜索#{h(params[:q])}"
+  %body
+    .top-nav
+    #wrapper
+      #header
+        .nav-srh
+          %form{:action => '/book/search', :method => 'get'}
+            .inp
+              %span
+                %input{:type => 'text', :name => 'q', :value => params[:q]}
+              %span
+                %input.btn-srh{:type => 'submit', :value => '搜索书籍'}
+      #content
+        - if @books and @books.size > 0
+          %div{:class => %w(grid-16-18 clearfix)}
+            %h2= "搜索<span class='sq'>#{h params[:q]}</span>的结果"
+            .article
+              - @books.each do |book|
+                %table{:width => "100%"}
+                  %tbody
+                    %tr
+                      %td{:width => 100, :valign => 'top'}
+                        %a.nbg{:href => book.alt_link, :title => book.name}
+                          %img{:src => book.image_link, :alt => book.name}
+                      %td{:valign => 'top'}
+                        .pl2
+                          %a{:href => book.alt_link }= h(book.name)
+                          %p.pl= h pl(book)
+                          .star
+                            %span.rating_nums= h(book.average) + "分"
+                            %span.pl= "(#{book.num_raters}人评价)"
+                            %p
+                              %span.rr
+                                %a{:id => "colbutt-#{book.subject_id}", :class => %w(colbutt), :href => 'javascript:;'}
+                                  %span{"book-img" => book.image_link, "book-title" => book.name, "book-alink" => book.alt_link, "book-sid" => book.subject_id }
+                                    %em 放入对比栏
+                  %p.ul
+            .aside
+              %h2 对比栏
+              %form{:action => "/book/bh", :method => 'get'}
+                .content
+                  - if @books[0] and @books[1] and false
+                    - @books[0,2].each do |book|
+                      %dl.bh_col{:padded => "padded"}
+                        %input{:type => 'hidden', :name => 'bh_books[]', :value => book.subject_id }
+                        %dt
+                          %a{:href => book.alt_link}
+                          %img{:src => book.image_link}
+                        %dd
+                          %a{:href => book.alt_link}= h book.name
+                          %span.book_x X
+                  - else
+                    %dl.bh_col{:padded => "null"}
+                      %dt
+                        %img{:src => '/images/book-default-small.gif'}
+                      %dd
+                        选择一本书
+                    %dl.bh_col{:padded => "null"}
+                      %dt
+                        %img{:src => '/images/book-default-small.gif'}
+                      %dd
+                        选择一本书
+                  .extra
+                  %input.c-btn{:type => 'submit', :value => '开始对比', :disabled => 'disabled'}
+            .extra
+      #footer
+  :javascript
+    var books = #{json(@books)};
+    BrainHalf.ccInit(books);

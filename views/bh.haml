@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+%html{:lang => "zh-CN"}
+  %meta{'http-equiv' => "Content-Type", :content => "text/html; charset=utf-8"}
+  %link{ :href => '/css/brainhalf.css', :rel => 'stylesheet', :type => 'text/css'}
+  %title= h @book.name
+  %body
+    #wrapper
+      #content
+        %div{:class => %w(grid-16-18 clearfix)}
+          %h1= "建议阅读<span class='bn'>“#{h @book.name}”</span>"
+          .article
+            %a.nbg{:href => @book.alt_link, :tilte => @book.name }
+              %img{:src => @book.image_link(:large), :atl => @book.name }
