@@ -64,6 +64,11 @@ describe("BrainHalf", function(){
             expect(book_sids).toEqual([]);
         })
 
+        it(".getBookPadHtml获得书的image_link, alt_link, name, subject_id", function(){
+            var $source = $('.colbutt').children('span');
+            var book_pad_html = BrainHalf.getBookPadHtml($source);
+            expect(book_pad_html).toMatch(/name="bh_books\[\]"/);
+        })
 
     })
 
@@ -92,18 +97,11 @@ describe("BrainHalf", function(){
             expect($(".c-btn")).toBeDisabled();
         })
 
-        it(".getBookPadHtml获得书的image_link, alt_link, name, subject_id", function(){
-            var $source = $('.colbutt').children('span');
-            var book_pad_html = BrainHalf.getBookPadHtml($source);
-            expect(book_pad_html).toMatch(/name="bh_books\[\]"/);
-        })
-
         it("对比栏的左栏空白，当点击'放入对比栏'时，左栏将填上一本书", function(){
-            BrainHalf.clearBooksAtCol();
             clearColumn(0);
             var $l_col = $($(".bh_col")[0]);
             var $ccbtn = $('.colbutt');
-            var $cb = $($ccbtn[1]);
+            var $cb = $($ccbtn[2]);
             var book_sid = $cb.attr("id").replace("colbutt-", '');
             var book = BrainHalf.getBookBySid(book_sid);
             var book_pad_html = BrainHalf.getBookPadHtml(book);
@@ -114,6 +112,7 @@ describe("BrainHalf", function(){
         it("对比栏里的右栏空白，左栏有书，当点击'放入对比栏'时，右栏将填上一本书，左栏不变", function(){
             padColumn(0);
             clearColumn(1);
+            window.location.hash = '';
             var $ccbtn = $('.colbutt');
             var $cb = $($ccbtn[1]);
             var book_sid = $cb.attr('id').replace('colbutt-', '');
@@ -208,7 +207,9 @@ describe("BrainHalf", function(){
             expect($('.c-btn')).not.toBeDisabled();
         })
 
-
+        afterEach(function(){
+            window.location.hash = '';
+        })
 
     })
 
@@ -236,12 +237,13 @@ describe("BrainHalf", function(){
                 BrainHalf.ccInit(book_sources);
                 var $colbut = $('#colbutt-' + '1767945');
                 expect($colbut.find('em').text()).toEqual('已经在对比栏中');
+            })
 
+            afterEach(function(){
+                window.location.hash = '';
             })
 
         })
-
-
 
         it("添加一本书到对比栏后，url将增加该书的sid锚点", function(){
             BrainHalf.ccInit(book_sources);
@@ -251,9 +253,6 @@ describe("BrainHalf", function(){
             expect(window.location.hash).toMatch(book_sid);
         })
 
-        afterEach(function(){
-            window.location.hash = '';
-        })
     })
 
     function clearColumn(index){

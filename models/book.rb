@@ -24,6 +24,8 @@ class Book
   class << self
 
     def where(query = { })
+      query.delete_if{ |k, v| v.blank? }
+      return [] if query.blank?
       sid = query[:sid] || query['sid']
       q = query[:q] || query['q']
       if sid
@@ -31,7 +33,7 @@ class Book
       elsif q
         xml = Api::DouBan.get("/book/subjects", :q => q)
       end
-      books = parse(xml)
+      begin books = parse(xml) rescue [] end
     end
 
     def parse(xml)
@@ -50,7 +52,6 @@ class Book
             :translators => get_db_attribute(entry, "translator")
             ) do |book|
           gd = entry.xpath('gd:rating').first
-
           book.average = gd['average']
           book.num_raters = gd['numRaters']
           id = entry.xpath('xmlns:id').text

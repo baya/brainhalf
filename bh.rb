@@ -24,7 +24,7 @@ helpers do
         'alt_link' => book.alt_link,
         'subject_id' => book.subject_id.to_s
       }
-    }
+    } unless books.blank?
     book_sources.to_json
   end
 
@@ -44,6 +44,7 @@ get '/book/bh' do
   haml :bh
 end
 
+# 核心算法
 def brainhalf(book_sids)
   sid = book_sids[rand(book_sids.length)]
   Book.where(:sid => sid).first

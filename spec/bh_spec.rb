@@ -16,6 +16,12 @@ describe '脑半' do
   end
 
   describe '用户搜索书' do
+
+    it '用户搜索书籍时，输入了空的关键字' do
+      get '/book/search'
+      last_response.should be_ok
+    end
+
     it "用户搜索javascript相关的书籍" do
       get '/book/search', :q => "javascript"
       last_response.should be_ok
