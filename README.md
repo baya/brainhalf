@@ -10,3 +10,7 @@
 - 跑"rake jasmine"启动javascript测试服务，然后在浏览器里输入'http://localhost:8888/'运行所有javascript测试。
 - 如果你要提交代码，希望你的代码中包含详细的测试，并且请确保你的代码能够通过上面的两项测试。
 
+## 部署
+
+demo地址'http://brainhalf.heroku.com'
+
