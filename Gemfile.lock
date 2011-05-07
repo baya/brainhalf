@@ -44,6 +44,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bundler
   haml
   isbn
   jasmine

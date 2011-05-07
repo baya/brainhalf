@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+require 'isbn'
 require File.dirname(__FILE__) + '/spec_helper'
 
 describe Book do
